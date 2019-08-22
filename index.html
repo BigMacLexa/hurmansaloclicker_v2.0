@@ -1,0 +1,118 @@
+<script>
+    function update() {
+        document.getElementById('text').value = kliksausCount;
+        document.title = kliksausCount + " Kliksausta";
+        document.getElementById('amountAutoKliksaus').innerHTML = "Olet palkannut " + autoKliksaus + " Kurssirunkoa.";
+        document.getElementById('costAutoKliksaus').innerHTML = ((autoKliksaus+1) * 12) + " Kliksausta";
+        
+        document.getElementById('amountBanttonen').innerHTML = "Olet palkannut " + banttonen + " Bana Banttosta.";
+        document.getElementById('costBanttonen').innerHTML = ((banttonen+1) * 1000) + " Kliksausta";
+        
+        document.getElementById('costMultiplier').innerHTML = ((multiplier) * 10000) + " Kliksausta";
+        document.getElementById('currentMultiplier').innerHTML = "Katuporan lvl: " + (multiplier);
+        
+        document.getElementById('kliksaustaSekunnissa').innerHTML = "Kurssirunko ja Banttonen kliksailevat " + 
+            (((autoKliksaus)+(banttonen*3))*multiplier) + " kertaa sekunnissa.";
+    }
+    
+    var multiplier = 1; //Hanhen katuporan variablet on nimellä multiplier, koska se on multiplier :D
+    var kliksausCount = 0;
+    var autoKliksaus = 0; //kurssirungon variablet on nimellä autoKliksaus, koska ajattelin kirjoittaessa alkuperäisen pelin "autoclicker" kursoreita.
+    var banttonen = 0;
+    
+    function timer() {
+        kliksausCount = kliksausCount + autoKliksaus*multiplier;
+        kliksausCount = kliksausCount + banttonen*3*multiplier;
+        update()
+    }
+    setInterval(timer, 1000)
+</script>
+<html>
+<head><title>0 Kliksausta</title></head>
+<body>
+    
+    <p id="kliksaustaSekunnissa">Kurssirunko ja Banttonen kliksailevat 0 kertaa sekunnissa.</p>
+ 
+    <a href=# onClick="add()"><img src=ossiHurmansalo.png width="250px" height="250px"></a>
+    <br><br>
+    Olet kliksaillut Hurmansaloa
+    <input type="text" id="text" disabled style= text-align:center>
+    <script>
+    function add() {
+        kliksausCount = kliksausCount + 1
+        update()
+    }
+    
+    </script>
+    kertaa.
+    <br><br>
+        
+    <button><a href="#" onClick="save()">Tallenna</a></button>
+    <button><a href="#" onClick="load()">Lataa viimeisin Tallennus</a></button>
+    <br><br>
+    
+    <p>Palkkaa Kurssirunko auttamaan kliksailussa!</p>
+    <button><a href="#" onClick="ostaAutoKliksaus()"><img src=kurssirunko.jpg width="75px" height="75px"></a></button>
+    <p id="costAutoKliksaus">12 Kliksausta</p>
+    <p id="amountAutoKliksaus">Olet palkannut 0 Kurssirunkoa.</p>
+    
+    <br><br>
+    
+    <p>Palkkaa Bana Banttonen auttamaan kliksailussa!</p>
+    <button><a href="#" onClick="ostaBanttonen()"><img src=panttonen.jpg width="75px" height="75px"></a></button>
+    <p id="costBanttonen">1000 Kliksausta</p>
+    <p id="amountBanttonen"> Olet palkannut 0 Bana Banttosta.</p>
+    
+    <br><br>
+    
+    <p>Päivitä PullaHanhen katuporaa moninkertaistaaksesi Kurssirungon ja Banttosen kliksailut!</p>
+    <button><a href="#" onClick="ostaMultiplier()"><img src="katupora.jpg" width="75px" height="75px"></a></button>
+    <p id="costMultiplier">10000 Kliksausta</p>
+    <p id="currentMultiplier">Katuporan lvl: 1</p>
+    
+    <script>
+    function save() {
+        localStorage.setItem("kliksausCount", kliksausCount);
+        localStorage.setItem("autoKliksaus", autoKliksaus);
+        localStorage.setItem("banttonen", banttonen);
+        localStorage.setItem("multiplier", multiplier);
+    }
+    function load() {
+        kliksausCount = localStorage.getItem("kliksausCount");
+        kliksausCount = parseInt(kliksausCount);
+        autoKliksaus = localStorage.getItem("autoKliksaus");
+        autoKliksaus = parseInt(autoKliksaus);
+        banttonen = localStorage.getItem("banttonen");
+        banttonen = parseInt(banttonen);
+        multiplier = localStorage.getItem("multiplier");
+        multiplier = parseInt(multiplier);
+        update()
+    }
+    function ostaAutoKliksaus() {
+        if (kliksausCount >= ((autoKliksaus+1) * 12)) {
+            kliksausCount = kliksausCount - ((autoKliksaus+1) * 12);
+            autoKliksaus = autoKliksaus + 1;
+            update()
+            }
+    } 
+    
+    function ostaBanttonen() {
+        if (kliksausCount >=((banttonen+1) * 1000)) {
+            kliksausCount = kliksausCount - ((banttonen+1) * 1000);
+            banttonen = banttonen +1;
+            update()
+        }
+    }
+        
+    function ostaMultiplier() {
+        if(kliksausCount >= ((multiplier) * 10000)) {
+            kliksausCount = kliksausCount - ((multiplier) * 10000);
+            multiplier = multiplier +1;
+            update();
+        }
+    }  
+        
+    </script>
+    
+</body>
+</html>

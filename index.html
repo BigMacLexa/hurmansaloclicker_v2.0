@@ -3,16 +3,16 @@
         document.getElementById('text').value = kliksausCount;
         document.title = kliksausCount + " Kliksausta";
         document.getElementById('amountAutoKliksaus').innerHTML = "Olet palkannut " + autoKliksaus + " Kurssirunkoa.";
-        document.getElementById('costAutoKliksaus').innerHTML = ((autoKliksaus+1) * 12) + " Kliksausta";
+        document.getElementById('costAutoKliksaus').innerHTML = ((autoKliksaus+1) * 50) + " Kliksausta";
         
         document.getElementById('amountBanttonen').innerHTML = "Olet palkannut " + banttonen + " Bana Banttosta.";
         document.getElementById('costBanttonen').innerHTML = ((banttonen+1) * 1000) + " Kliksausta";
         
-        document.getElementById('costMultiplier').innerHTML = ((multiplier) * 10000) + " Kliksausta";
+        document.getElementById('costMultiplier').innerHTML = ((multiplier) * 25000) + " Kliksausta";
         document.getElementById('currentMultiplier').innerHTML = "Katuporan lvl: " + (multiplier);
         
         document.getElementById('kliksaustaSekunnissa').innerHTML = "Kurssirunko ja Banttonen kliksailevat " + 
-            (((autoKliksaus)+(banttonen*3))*multiplier) + " kertaa sekunnissa.";
+            (((autoKliksaus)+(banttonen*12))*multiplier) + " kertaa sekunnissa.";
     }
     
     var multiplier = 1; //Hanhen katuporan variablet on nimellä multiplier, koska se on multiplier :D
@@ -53,7 +53,7 @@
     
     <p>Palkkaa Kurssirunko auttamaan kliksailussa!</p>
     <button><a href="#" onClick="ostaAutoKliksaus()"><img src=kurssirunko.jpg width="75px" height="75px"></a></button>
-    <p id="costAutoKliksaus">12 Kliksausta</p>
+    <p id="costAutoKliksaus">50 Kliksausta</p>
     <p id="amountAutoKliksaus">Olet palkannut 0 Kurssirunkoa.</p>
     
     <br><br>
@@ -67,7 +67,7 @@
     
     <p>Päivitä PullaHanhen katuporaa moninkertaistaaksesi Kurssirungon ja Banttosen kliksailut!</p>
     <button><a href="#" onClick="ostaMultiplier()"><img src="katupora.jpg" width="75px" height="75px"></a></button>
-    <p id="costMultiplier">10000 Kliksausta</p>
+    <p id="costMultiplier">25000 Kliksausta</p>
     <p id="currentMultiplier">Katuporan lvl: 1</p>
     
     <script>
@@ -89,8 +89,8 @@
         update()
     }
     function ostaAutoKliksaus() {
-        if (kliksausCount >= ((autoKliksaus+1) * 12)) {
-            kliksausCount = kliksausCount - ((autoKliksaus+1) * 12);
+        if (kliksausCount >= ((autoKliksaus+1) * 50)) {
+            kliksausCount = kliksausCount - ((autoKliksaus+1) * 50);
             autoKliksaus = autoKliksaus + 1;
             update()
             }
@@ -105,8 +105,8 @@
     }
         
     function ostaMultiplier() {
-        if(kliksausCount >= ((multiplier) * 10000)) {
-            kliksausCount = kliksausCount - ((multiplier) * 10000);
+        if(kliksausCount >= ((multiplier) * 25000)) {
+            kliksausCount = kliksausCount - ((multiplier) * 25000);
             multiplier = multiplier +1;
             update();
         }
